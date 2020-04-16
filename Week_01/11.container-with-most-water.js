@@ -30,4 +30,4 @@ var maxArea = function(a){
         max = Math.max(max,area);
     }
     return max;
-}
+};
