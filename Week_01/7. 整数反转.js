@@ -24,8 +24,8 @@ var reverse = function(x) {
     }else{
         _reverse(0,len-1);
     }
-    let res = Number(arr.join(""))
-    if (res > Math.pow(2, 31) - 1 || res < Math.pow(2, 31) * -1) res = 0
+    let res = Number(arr.join(""));
+    if (res > Math.pow(2, 31) - 1 || res < Math.pow(2, 31) * -1) res = 0;
     return res;
 
     function _reverse(i,j){
@@ -38,5 +38,4 @@ var reverse = function(x) {
         }
     }
 };
-
-console.log(reverse(1534236469));;
+console.log(reverse(1534236469));
