@@ -29,14 +29,14 @@ var MinStack = function() {
  */
 MinStack.prototype.push = function(x) {
     this.stack.push(x);
-    if(this.temp.length==0||x<=this.temp[this.temp.length-1]) this.temp.push(x);
+    if(this.temp.length===0||x<=this.temp[this.temp.length-1]) this.temp.push(x);
 };
 
 /**
  * @return {void}
  */
 MinStack.prototype.pop = function() {
-    if(this.stack.pop() == this.temp[this.temp.length-1])  this.temp.pop();
+    if(this.stack.pop() === this.temp[this.temp.length-1])  this.temp.pop();
 };
 
 /**

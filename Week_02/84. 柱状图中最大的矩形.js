@@ -21,7 +21,6 @@ var largestRectangleArea1 = function(heights) {
 
 };
 
-
 var largestRectangleArea2 = function(heights) {
     function calcArea(start,end){
         if(start > end){
@@ -40,7 +39,7 @@ var largestRectangleArea2 = function(heights) {
 };
 
 // 动态规划
-var largestRectangleArea = function(heights) {
+var largestRectangleArea3 = function(heights) {
     const cache = [];
     function calcArea(start,end){
         if(start > end){
@@ -70,4 +69,62 @@ var largestRectangleArea = function(heights) {
     }
     return calcArea(0,heights.length-1);
 };
-console.log(largestRectangleArea([7,0,7,7,0,6,7,5,7,231,321,32,6,13,21,321,32]));
+
+
+/**
+ * 压栈的方法
+ * @param heights
+ * @returns {number}
+ */
+var largestRectangleArea4 = function(heights){
+    var maxarea = 0;
+    var stack = [-1]; // 存储的下标
+    for(var i = 0;i < heights.length;i++){
+        // heights[stack[stack.length-1]]  栈中 最后的值
+        while(stack.length > 1 && heights[i] <= heights[stack[stack.length-1]]){
+            // 栈中最后的下标  stack[stack.length-1]
+            // 分别比较前面元素到当前下标的比较
+            maxarea = Math.max(maxarea,heights[stack.pop()] * (i - stack[stack.length-1] - 1));
+        }
+        stack.push(i);
+    }
+    while(stack.length > 1){
+        maxarea = Math.max(maxarea,heights[stack.pop()] * (heights.length - stack[stack.length-1] - 1));
+    }
+    return maxarea;
+};
+
+// 参考国际版 做了小的优化
+let largestRectangleArea5 = function(heights){
+    let maxArea = 0;
+    const stack = [];
+    heights = [0].concat(heights).concat([0]);
+    for(let i = 0; i < heights.length;i++){
+        while(stack && heights[i] < heights[stack[stack.length-1]]){
+            const j = stack.pop();
+            maxArea = Math.max(maxArea,heights[j]*(i-stack[stack.length-1]-1));
+        }
+        stack.push(i);
+    }
+    return maxArea;
+};
+
+var largestRectangleArea6 = function(heights) {
+    let maxarea = 0;
+    for (let i = 0; i < heights.length; i++) {
+        let leftBound = i-1;
+        let rightBound = i+1;
+        while(heights[leftBound] >= heights[i] && leftBound > 0){
+            leftBound--;
+        }
+        while(heights[rightBound]> heights[i] && rightBound < heights.length-1){
+            rightBound++;
+        }
+        let area = heights[i] * (rightBound-leftBound-2+1);
+        maxarea = Math.max(area,maxarea);
+    }
+    return maxarea;
+};
+
+
+console.log(largestRectangleArea5([7,0,7,7,5,321,32,31,2,35,465,4,654,65]));
