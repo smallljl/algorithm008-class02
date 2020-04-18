@@ -20,7 +20,7 @@ var plusOne = function(digits) {
     for(let i = len-1; i >= 0;i--){
         digits[i]++;
         digits[i]%=10;
-        if(digits[i]!=0){
+        if(digits[i]!==0){
             return digits;
         }
     }
