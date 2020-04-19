@@ -43,4 +43,4 @@ var subtractProductAndSum2 = function (n){
         dig*=parseInt(str.charAt(i));
     }
     return dig-sum;
-}
+};
