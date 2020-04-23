@@ -56,6 +56,5 @@ var wordPattern = function(pattern,str){
     return true;
 };
 
-
 hash = {a:dog,b:cat};
 set = ["a","b"];
