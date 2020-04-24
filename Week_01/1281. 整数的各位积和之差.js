@@ -44,3 +44,4 @@ var subtractProductAndSum2 = function (n){
     }
     return dig-sum;
 };
+
