@@ -8,22 +8,62 @@
     [-1, -1, 2]
 ]*/
 // 1.暴力求解
-var threeSum = function(nums) {
+var threeSum1 = function(nums) {
     let res = [];
-    let repeatRes = new Set();
     for (let i = 0; i < nums.length - 2; i++) { // 每个人
         for (let j = i + 1; j < nums.length - 1; j++) { // 依次拉上其他每个人
             for (let k = j + 1; k < nums.length; k++) { // 去问剩下的每个人
                 if (nums[i] + nums[j] + nums[k] === 0) { // 我们是不是可以一起组队
                     let resItem =[nums[i], nums[j], nums[k]];
-                    let repeactStr = String(resItem.sort());
-                    if(!repeatRes.has(repeactStr)){
-                        res.push(resItem);
-                        repeatRes.add(repeactStr);
-                    }
+                    res.push(resItem);
                 }
             }
         }
     }
     return res;
 };
+
+// map优化
+var threeSum2 = function(nums){
+    let res = [];
+    let hash = {};
+    for(let i = 0; i < nums.length-2; i ++){
+        for(let j = i+1; j < nums.length -1; j++){
+            if(hash[nums[j]] !== undefined){
+                res.push(hash[nums[j]].concat([nums[j]]));
+                hash[nums[j]] = undefined;
+            }else{
+                let mark = 0 - nums[i] - nums[j];
+                hash[mark] = [nums[i],nums[j]];
+            }
+        }
+    }
+    return res;
+}
+
+// 排序双指针
+var threeSum = function(nums){
+    let res = [];
+    let len = nums.length;
+    if(nums === null || len  < 3) return [];
+    nums.sort((a,b)=>a-b);
+    for(let i = 0; i < len; i++){
+        if(nums[i] > 0) break;
+        if(i > 0 && nums[i] === nums[i-1]) continue;
+        let L = i+1;
+        let R = len-1;
+        while(L < R){
+            let sum = nums[i] + nums[L] + nums[R];
+            if(sum === 0){
+                res.push([nums[i],nums[L],nums[R]]);
+                while(L < R && nums[L] === nums[L+1]) L++;
+                while(L < R && nums[R] === nums[R-1]) R--;
+                L++;
+                R--;
+            }
+            else if(sum < 0) L++;
+            else if(sum > 0) R--;
+        }
+    }
+    return res;
+}

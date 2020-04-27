@@ -14,7 +14,7 @@
 // 暴力
 var twoSum2 = function(nums, target) {
     for(let i =0; i < nums.length;i++){
-        for(let j = 1;j < nums.length; j++){
+        for(let j = i+1;j < nums.length; j++){
             if(nums[j] === target - nums[i] && i !== j){
                 return [i,j];
             }
@@ -34,3 +34,34 @@ var twoSum = function(nums,target){
         }
     }
 }
+
+// 一遍hash法
+var twoSum = function(nums,target){
+    if (nums.length === 2) return [0, 1];
+    let map = {};
+    let dis = 0; // 差值
+    for(let  i = 0; i < nums.length;i++){
+        if(map[target - nums[i]] !== undefined){
+            return [map[target - nums[i]],i];
+        }
+        // 存值的下标 map[24] = 1;
+        map[nums[i]] = i;
+    }
+    return;
+}
+
+// 参考国际站优化
+var twoSum = function(nums,target){
+    if (!nums.length) return;
+    if (nums.length === 2) return [0, 1];
+    let map = {};
+    for(let  i = 0; i < nums.length;i++){
+        if(target-nums[i] in map){
+            return [map[target - nums[i]],i];
+        }
+        // 存值的下标 map[24] = 1;
+        map[nums[i]] = i;
+    }
+    return;
+}
+
