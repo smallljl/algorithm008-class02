@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2020-04-22 11:21:02
- * @LastEditTime: 2020-04-24 20:19:39
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: \algorithm008-class02\Week_02\面试题59 - I. 滑动窗口的最大值.js
- */
 /*给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。
 
 示例:
