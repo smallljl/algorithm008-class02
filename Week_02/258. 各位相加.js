@@ -12,7 +12,7 @@ var addDigits = function(num) {
     function _addDigits(num){
         if(num < 10) return num;
         let next = 0;
-        while(num != 0){
+        while(num !== 0){
             next += num % 10;
             num = Math.floor(num/10);
         }
@@ -24,4 +24,4 @@ var addDigits = function(num) {
 var addDigits2 = function(num){
     if (num < 10) return num
     return num % 9 || 9
-}
+};

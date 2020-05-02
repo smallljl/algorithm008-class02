@@ -19,11 +19,11 @@ var addStrings = function(num1,num2){
     // 0213213745313
     let res = '', sum = 0;
     while(max--) {
-        console.log(num1[max],num2[max],(sum>9))
+        console.log(num1[max],num2[max],(sum>9));
         sum = (+num1[max]) + (+num2[max]) + (sum > 9);  // 上次的值大于9的话+1  sum > 9
         res = (sum % 10) + res;
     }
     return sum > 9 ? '1' + res : res; 
-}
+};
 
 addStrings("0123132789798","021321374657899854");
