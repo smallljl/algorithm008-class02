@@ -25,7 +25,7 @@ var combine = function(n, k) {
             return;
          }
          for(let i = start; i <= n; i++){
-            subList.push(i)
+            subList.push(i);
             _combine(i+1,subList);
             subList.pop();
          }

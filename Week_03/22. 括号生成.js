@@ -14,7 +14,7 @@
     链接：https://leetcode-cn.com/problems/generate-parentheses
     * 
  */
-var generateParenthesis = function(n){
+var generateParenthesis1 = function(n){
     let list = [];
     function _generateParenthesis(l,r,s){
         if(l > r) return;
@@ -27,4 +27,21 @@ var generateParenthesis = function(n){
     }
     _generateParenthesis(n,n,"");
     return list;
-}
+};
+
+var generateParenthesis = function(n){
+  let list = [];
+  function _generateParenthesis(level,n,s){
+      if(s.length === n){
+          list.push(s);
+          return null;
+      }
+      _generateParenthesis(level+1,n,s+"(");
+      _generateParenthesis(level+1,n,s+")");
+  }
+
+  _generateParenthesis(0,2*n,"");
+  return list;
+};
+
+console.log(generateParenthesis(3));;
