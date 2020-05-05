@@ -18,7 +18,6 @@ var combine = function(n, k) {
     let list = [];
     let subList = [];
     function _combine(start,subList){
-         debugger
          if(subList.length === k){
             console.log(subList);
             list.push(subList.slice(0));
@@ -26,12 +25,30 @@ var combine = function(n, k) {
          }
          for(let i = start; i <= n; i++){
             subList.push(i);
-            _combine(i+1,subList);
-            subList.pop();
+            _combine(+1,subList);
+            subList.poip();
          }
     }
     _combine(1,subList);
     return list;
  };
+
+
+var combine1 = function(n,k){
+    let list = [];
+    let sublist = [];
+    function dfs(sublist,index){
+        if(index > n){
+            sublist.length === k && list.push(sublist.slice(0));
+            return;
+        }
+        dfs(sublist,index+1);  // 不选
+        sublist.push(index);
+        dfs(sublist,index+1); // 选
+        sublist.pop();
+    }
+    dfs(sublist,1);
+    return list;
+};
 
  combine(3,2)

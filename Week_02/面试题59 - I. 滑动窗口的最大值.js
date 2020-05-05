@@ -34,7 +34,6 @@ var maxSlidingWindow1 = function(nums, k) {
         arr.push(res)
     }
     return arr;
-
     function getMin(start,end){
         let max = nums[start];
         for(let i= start+1; i <= end;i++){

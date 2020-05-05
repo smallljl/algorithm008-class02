@@ -19,3 +19,38 @@
 *
 */
 
+/**
+ * 深度搜索优先
+ */
+var permute = function(nums) {
+    let list = [];
+    let sublist = [];
+    let len = nums.length;
+    let used = [];
+    function dfs(sublist,index,used){
+        if(index === len){
+            list.push(sublist.slice(0));
+            return;
+        }
+        for(let i = 0; i < len;i++){
+            if(used[i]){
+                continue;
+            }
+            sublist.push(nums[i]);
+            used[i] = true;
+            dfs(sublist,index+1,used);
+            sublist.pop();
+            used[i] = false;
+        }
+    }
+    dfs(sublist,0,used);
+    return list;
+};
+
+/**
+ * 广度搜索优先
+ */
+
+var permute1 = function(){
+
+};

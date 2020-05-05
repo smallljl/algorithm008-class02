@@ -31,9 +31,8 @@ let solveNQueens = function(n){
             return;
         }
         for(let col = 0;col < n; col++){
-            if(cols.has(col) || pies.has(col+row) || nas.has(col-row)){
+            if(cols.has(col) || pies.has(col+row) || nas.has(col-row))
                 continue;
-            }
             cols.add(col);
             pies.add(col+row);
             nas.add(col-row);
@@ -50,11 +49,10 @@ let solveNQueens = function(n){
     const generateCheckerboard = function () {
         return res.map(queens => {
             return queens.map(q => {
-                return Array(n).fill().map((k, i) => {return i === q ? 'Q' : '.'}).join('')
+                return Array(n).fill().map((k, i) => {return i === q ? 'Q' : '.'}).join('');
             })
         })
     };
     return generateCheckerboard(res);
 };
-
 console.log(solveNQueens(8));

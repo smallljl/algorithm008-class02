@@ -31,7 +31,7 @@
  */
 var spiralOrder = function(matrix){
     let list = [];
-    if(matrix.length === 0 || matrix === null) return list;
+    if(matrix.length === 0) return list;
     let m = matrix.length;  // 行
     let n = matrix[0].length; // 列
     let count =  parseInt((Math.min(m,n)+1)/2);   //  计算的层数

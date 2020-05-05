@@ -77,18 +77,18 @@ var removeOuterParentheses3 = function(S){
 
 // 用两个数字统计
 var removeOuterParentheses6 = function(S){
-    var child = ''
-    var right = 0
-    var left = 0
-    var contents = ''
+    var child = '';
+    var right = 0;
+    var left = 0;
+    var contents = '';
     for(var i = 0; i<S.length; i ++){
-        if(S[i]== '(') { right++ }
-        if(S[i]== ')') { left++ }
-        contents+=S[i]
-        if (right == left) {
+        if(S[i]=== '(') { right++ }
+        if(S[i]=== ')') { left++ }
+        contents+=S[i];
+        if (right === left) {
             right = 0;
             left = 0;
-            child +=contents.slice(1,-1)   // 截取字符串的两边
+            child +=contents.slice(1,-1);   // 截取字符串的两边
             contents = ''
         }
     }
@@ -109,7 +109,7 @@ var removeOuterParentheses5 = function(S){
             if(stack.length) res+=S[i];
         }
     }
-}
+};
 
 // 计数器
 var removeOuterParentheses7 = function(S){
@@ -151,4 +151,4 @@ var removeOuterParentheses = function(S) {
         }
     }
     return res;
-}
+};

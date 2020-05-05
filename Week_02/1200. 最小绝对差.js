@@ -17,7 +17,7 @@
  * 
  */
 var minimumAbsDifference = function(arr) {
-    arr.sort((a,b)=>a-b)
+    arr.sort((a,b)=>a-b);
     let min = Infinity;
     let j = 0;
     let k = 0;

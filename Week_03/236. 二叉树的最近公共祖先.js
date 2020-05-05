@@ -22,17 +22,42 @@
     来源：力扣（LeetCode）
     链接：https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree
  */
-var lowestCommonAncestor = function(root, p, q) {
-    function _lowestCommonAncestor(node){
-        if(node === null || node === p || node === q){
+var lowestCommonAncestor1 = function(root, p, q) {
+    const _lowestCommonAncestor = (node) => {
+        if(node === null || node === p || node === q)
             return node;
-        }
         let left = _lowestCommonAncestor(node.left,p,q);
         let right = _lowestCommonAncestor(node.right,p,q);
-        if(left && right){
+        if(left && right)
             return node;
-        }
-        return left ? left : right;
-    }
+        return left ? left : right;  // 两个钟有一个  没有就返回null
+    };
     return _lowestCommonAncestor(root);
+};
+
+/**
+ *   遍历，组建一个map，用来存放{键 = 节点值，值 = 父节点值}
+     组建两个数组，存放p，q遍历map一路向上找到根节点的途径
+     找到公共祖先
+     根据公共祖先的值返回公共祖先节点
+ * @param root
+ * @param p
+ * @param q
+ */
+let lowestCommonAncestor = function(root,p,q){
+    let parMap = new Map();
+    nodeArr = [];
+    parMap.set(root.val,null);
+    const travel = root => {
+        if(root){
+            nodeArr.push(root);
+            if(root.left) parMap.set(root.left.val,root.val);
+            if(root.right) parMap.set(root.right.val,root.val);
+            travel(root.left);
+            travel(root.right);
+        }
+    };
+    travel(root);
+
+
 };
