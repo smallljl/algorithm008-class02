@@ -29,5 +29,68 @@
      链接：https://leetcode-cn.com/problems/minimum-genetic-mutation
  *
  */
+var minMutation1 = function(start, end, bank) {
+    let min = Infinity;
+    function backtracing(start,end,bank,used,count){
+        if(start === end){
+            min = Math.min(min,count);
+            return;
+        }
+        for(let i = 0; i < bank.length; i ++){
+            if(!used[i] && diff(start,bank[i]) === 1){
+                used[i] = true;
+                backtracing(bank[i],end,bank,used,count+1);
+                used[i] = false;
+            }
+        }
+    }
+    function diff(a,b){
+        let d = 0;
+        for(let i = 0; i < a.length;i++){
+            if(a.charAt(i) !== b.charAt(i)){
+                d++;
+            }
+        }
+        return d;
+    }
+    backtracing(start,end,bank,[],0);
+    return min;
+};
+let start = "AACCGGTT";
+let end =  "AAACGGTA";
+let bank = ["AACCGGTA", "AACCGCTA", "AAACGGTA"];
 
+// 1
+console.log(minMutation(start, end, bank));
 
+function minMutation2(start, end, bank){
+    let min = Infinity;
+    let choose = ["A","C","G","T"];
+    let bankSet = new Set(bank);
+    let checkset = new Set();
+    function dfs(start,end,level,checkset){
+        if(start === end){
+            min = Math.min(level,min);
+            return;
+        }
+        for(let i = 0; i < start.length;i++){
+            for(let j = 0; j < choose.length;j++){
+                let d = start.slice(0,i) + choose[j] + start.slice(i+1);
+                if(!checkset.has(d) && bankSet.has(d)){
+                    checkset.add(d);
+                    dfs(d,end,level+1,checkset);
+                    checkset.delete(d);
+                }
+            }
+        }
+    }
+    dfs(start,end,0,checkset);
+    return min === Infinity ? -1 : min;
+}
+
+function minMutation(start, end, bank){
+    function bfs(start,end){
+
+    }
+    bfs(start,end);
+}
