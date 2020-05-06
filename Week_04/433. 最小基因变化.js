@@ -87,10 +87,3 @@ function minMutation2(start, end, bank){
     dfs(start,end,0,checkset);
     return min === Infinity ? -1 : min;
 }
-
-function minMutation(start, end, bank){
-    function bfs(start,end){
-
-    }
-    bfs(start,end);
-}

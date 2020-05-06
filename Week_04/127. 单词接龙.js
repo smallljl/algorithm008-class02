@@ -33,43 +33,93 @@
  *
  */
 var ladderLength = function(beginWord, endWord, wordList) {
-    if(!endWord || wordList.indexOf(endWord) === -1){
-        return 0;
-    }
-    // 各个通用状态对应所有单词
-    var comboDicts = {};
-    var len = beginWord.length;
-    for(var i = 0;i<wordList.length;i++){
-        for(var r = 0;r<len;r++){
-            var newWord = wordList[i].substring(0,r)+'*'+wordList[i].substring(r+1,len);
-            (!comboDicts[newWord]) && (comboDicts[newWord] = []);
-            comboDicts[newWord].push(wordList[i]);
+    let min = Infinity;
+    function backtracing(start,end,bank,used,count){
+        if(start === end){
+            min = Math.min(min,count);
+            return;
+        }
+        for(let i = 0; i < bank.length; i ++){
+            if(!used[i] && diff(start,bank[i]) === 1){
+                used[i] = true;
+                backtracing(bank[i],end,bank,used,count+1);
+                used[i] = false;
+            }
         }
     }
-    // Queue for BFS
-    var queue = [[beginWord,1]];
-    // visited
-    var visited = {beginWord:true};
-    while(queue.length > 0){
-        var currNode = queue.shift();
-        var currWord = currNode[0];
-        var currLevel = currNode[1];
-        for(var i = 0;i < len;i++){
-            // 通用状态
-            var newWord = currWord.substring(0,i)+'*'+currWord.substring(i+1,len);
-            if(newWord in comboDicts){
-                var tmpWords = comboDicts[newWord];
-                for(var z = 0;z<tmpWords.length;z++){
-                    if(tmpWords[z] === endWord){
-                        return currLevel + 1;
-                    }
-                    if(!visited[tmpWords[z]]){
-                        visited[tmpWords[z]] = true;
-                        queue.push([tmpWords[z],currLevel+1]);
+    function diff(a,b){
+        let d = 0;
+        for(let i = 0; i < a.length;i++){
+            if(a.charAt(i) !== b.charAt(i)){
+                d++;
+            }
+        }
+        return d;
+    }
+    backtracing(start,end,bank,[],0);
+    return min === Infinity ? 0 : min;
+};
+
+// BFS
+function ladderLength2(beginWord,endWord,wordList){
+   let queue = [beginWord];
+   let step = 1;
+   while(queue.length !== 0){
+       let next = [];
+       for(let word of queue){
+           for(let i = 0; i < word.length;i++){
+               let temp = word.substr(0,i)+word.substr(i+1);
+               for(let j = 0; j < wordList.length;j++){
+                   let check = wordList[j].substr(0,i)+wordList[j].substr(i+1);
+                   if(temp === check){
+                       if(wordList[j] === endWord){
+                           return step+1;
+                       }
+                       next.push(wordList[j]);
+                       wordList.splice(j,1);
+                       j--;
+                   }
+               }
+           }
+       }
+       queue = next;
+       step++;
+   }
+   return 0;
+}
+
+//BFS递归版
+function ladderLength3(beginWord,endWord,wordList){
+    let min = Infinity;
+    function bfs(level,layers,end,wordList){
+        if(!layers.length) return;
+        let next = [];
+        for(let i = 0; i < layers.length;i++){
+            if(layers[i] === end){
+                min = Math.min(min,level);
+                return;
+            }else{
+                let item = layers[i];
+                for(let k = 0; k < item.length;k++){
+                    let temp = item.substr(0,k)+item.substr(k+1);
+                    for(let j = 0; j < wordList.length;j++){
+                        let check = wordList[j].substr(0,k)+wordList[j].substr(k+1);
+                        if(temp === check){
+                            next.push(wordList[j]);
+                            wordList.splice(j,1);
+                            j--;
+                        }
                     }
                 }
             }
         }
+        bfs(level+1,next,end,wordList);
     }
-    return 0;
-};
+    bfs(0,[beginWord],endWord,wordList);
+    return min === Infinity ? 0 : min+1;
+}
+
+let beginWord = "dog";
+let endWord = "col";
+let wordList = ["dol","col"];
+console.log(ladderLength3(beginWord, endWord, wordList));
