@@ -94,14 +94,13 @@ function ladderLength3(beginWord,endWord,wordList){
     function bfs(level,layers,end,wordList){
         if(!layers.length) return;
         let next = [];
-        for(let i = 0; i < layers.length;i++){
-            if(layers[i] === end){
+        for(let word of layers){
+            if(word === end){
                 min = Math.min(min,level);
                 return;
             }else{
-                let item = layers[i];
-                for(let k = 0; k < item.length;k++){
-                    let temp = item.substr(0,k)+item.substr(k+1);
+                for(let k = 0; k < word.length;k++){
+                    let temp = word.substr(0,k)+word.substr(k+1);
                     for(let j = 0; j < wordList.length;j++){
                         let check = wordList[j].substr(0,k)+wordList[j].substr(k+1);
                         if(temp === check){
@@ -114,6 +113,7 @@ function ladderLength3(beginWord,endWord,wordList){
             }
         }
         bfs(level+1,next,end,wordList);
+        next.length = 0;
     }
     bfs(0,[beginWord],endWord,wordList);
     return min === Infinity ? 0 : min+1;
