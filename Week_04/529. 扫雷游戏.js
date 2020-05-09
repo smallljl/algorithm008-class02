@@ -76,6 +76,11 @@ let updateBoard = function(board,click){
     return board;
 };
 
-let arr = [["E","E","E","E","E"],["E","E","M","E","E"],["E","E","E","E","E"],["E","E","E","E","E"]]
+let arr = [
+    ["E","E","E","E","E"],
+    ["E","E","M","E","E"],
+    ["E","E","E","E","E"],
+    ["E","E","E","E","E"]
+];
 
 console.log(updateBoard(arr, [3, 0]));

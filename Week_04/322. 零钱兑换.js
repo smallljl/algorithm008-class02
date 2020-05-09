@@ -1,12 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-05-06 21:10:11
- * @LastEditTime: 2020-05-08 16:30:58
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \algorithm008-class02\Week_04\322. 零钱兑换.js
- */
-/*
 *
 *       给定不同面额的硬币 coins 和一个总金额 amount。
 *       编写一个函数来计算可以凑成总金额所需的最少的硬币个数。\
