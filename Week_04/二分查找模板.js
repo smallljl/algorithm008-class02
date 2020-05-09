@@ -1,17 +1,9 @@
-/*
- * @Author: your name
- * @Date: 2020-05-09 09:38:31
- * @LastEditTime: 2020-05-09 10:43:42
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edite
- * @FilePath: \algorithm008-class02\Week_04\二分查找模板.js
- */
 let arr = [1,5,6,10,14,18,24,29,35,38,48,54,80];
 function binarySearch(array,target){
    let left = 0;
    let right = array.length - 1;
    while(left <= right){
-       let mid = parseInt((left + right) / 2);
+       let mid = ~~(left + (right-left) >> 1);
        if(array[mid] === target){
            return true;
        }else if(array[mid] < target){
@@ -26,7 +18,7 @@ function binarySearch(array,target){
 function binarySear(arr,target){
     function binarySea(left,right,target){
         if(left <= right){
-            let mid = parseInt((left+right)/2);
+            let mid = ~~((left+right)>>1);
             if(arr[mid] === target){
                 return true;
             }else if(arr[mid] < target){

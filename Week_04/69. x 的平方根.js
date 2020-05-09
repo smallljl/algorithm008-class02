@@ -9,7 +9,7 @@
 
     输出: 2
     示例 2:
-    
+
     输入: 8
     输出: 2
     说明: 8 的平方根是 2.82842..., 
@@ -21,13 +21,12 @@
 function mySqrt(x){
     if(x === 0 || x === 1)
         return x;
-    let left = 1;
+    let left = mid = 1;
     let right = x;
-    let mid = 1;
     while(left <= right){
-        mid = parseInt(left + (right-left)/2);
-        mid*mid>x ? right = mid-1 : left = mid+1;
+        mid = ~~(left + (right-left)/2);
+        (mid * mid > x) ? right = mid - 1 :left = mid + 1;
     }
-    return parseInt(right);
+    return ~~right;
 }
-console.log(mySqrt(8));
+console.log(mySqrt(4));
