@@ -55,4 +55,5 @@ let solveNQueens = function(n){
     };
     return generateCheckerboard(res);
 };
+
 console.log(solveNQueens(8));
