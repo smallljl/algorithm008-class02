@@ -1,3 +1,11 @@
+/*
+ * @Author: your name0
+ * @Date: 2020-05-09 09:38:31
+ * @LastEditTime: 2020-05-10 13:21:08
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \algorithm008-class02\Week_04\二分查找模板.js
+ */
 let arr = [1,5,6,10,14,18,24,29,35,38,48,54,80];
 function binarySearch(array,target){
    let left = 0;
@@ -33,5 +41,4 @@ function binarySear(arr,target){
     }   
     return binarySea(0,arr.length-1,target); 
 }
-
 console.log(binarySear(arr,18));

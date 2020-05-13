@@ -22,7 +22,6 @@ function Node(val){
     this.left = this.right = null;
 }
 
-
 var deserialize = function(data) {
     function _dfs(){
         if(data.length === 0) return null;
@@ -39,9 +38,8 @@ var deserialize = function(data) {
 
 // 深度搜索优先  DFS
 var levelOrder1 = function(root) {
-    if(!root || root.length < 1) {
+    if(!root || root.length < 1)
         return [];
-    }
     let ans = [];
     helper(ans, root, 0);
     return ans;
