@@ -29,19 +29,19 @@
     链接：https://leetcode-cn.com/problems/search-a-2d-matrix
  */
 var searchMatrix = function(matrix, target) {
-     //    / 行 % 列   matrix[0].length;
+    //    / 行 % 列   matrix[0].length;
     if(matrix.length === 0) return false;
     let n = matrix.length;
     let m = matrix[0].length;
     let left = 0;
-    let right = n*m - 1;
+    let right = n*m-1;
     while(left <= right){
         let mid = ~~(left + (right - left)/2);
         let midValue = matrix[~~(mid/m)][~~(mid%m)];
-        if(midValue === target)
+        if(midValue ===  target)
             return true;
         else if(midValue < target)
-            left = mid + 1;
+            left = mid+1;
         else
             right = mid - 1;
     }
