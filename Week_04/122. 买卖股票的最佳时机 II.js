@@ -21,7 +21,7 @@
     链接：https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii
  */
 // dfs 会超时
-var maxProfit = function(prices) {
+var maxProfit2 = function(prices) {
     let len = prices.length;
     let max = 0;
     function _f(prices,idx,status,profit){
@@ -40,11 +40,58 @@ var maxProfit = function(prices) {
     return max;
 };
 
-var maxProfit = function(prices){
+// 贪心算法
+var maxProfit3 = function(prices){
     let res = 0;
     for(let i = 0,len = prices.length; i < len-1;i++){
         let diff = prices[i+1] - prices[i];
         diff > 0 && (res += diff);
     }
     return res;
+}
+
+var maxProfit4 = function(prices){
+    let len = prices.length;
+    if(len < 2) return 0;
+    let dp = new Array(len);
+    dp[0] = [0,-prices[0]];
+    for(let i = 1; i < len; i++){
+        dp[i] = new Array(2);
+        dp[i][0] = Math.max(dp[i-1][0],dp[i-1][1] + prices[i]);  // 没有股票状态
+        dp[i][1] = Math.max(dp[i-1][1],dp[i-1][0] - prices[i]);  // 有股票状态
+    }
+    return dp[len-1][0];
+}
+
+
+// 状态压缩
+var maxProfit5 = function(prices){
+    let len = prices.length;
+    if(len < 2) return 0;
+    let cach = new Array(len);  // 有现金
+    let hold = new Array(len);  // 有股票
+    cach[0] = 0;
+    hold[0] = - prices[0];
+    for(let i = 1; i < len; i++){
+       cach[i] = Math.max(cach[i-1],hold[i-1]+prices[i]);
+       hold[i] = Math.max(hold[i-1],cach[i-1]-prices[i]);
+    }
+    return cach[len-1]; 
+}
+
+// 状态压缩
+var maxProfit = function(prices){
+    let len = prices.length;
+    if(len < 2) return 0;
+    let cach = 0;
+    let hold = -prices[0];
+    let preCash = chah;
+    let preHold = hold;
+    for(let i = 1; i < len; i++){
+        cach = Math.max(preCash,preHold+prices[i]);
+        hold = Math.max(preHold,preCash - prices[i]);
+        preCash = cach;
+        preHold = hold;
+    }
+    return cach;
 }
