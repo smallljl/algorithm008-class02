@@ -34,7 +34,6 @@ var levelOrder = function(root) {
         if(layer.length === 0){
             return false;
         }
-      
         let nextLayer = [];
         let curentArr = [];
         for(let i = 0; i < layer.length;i++){
