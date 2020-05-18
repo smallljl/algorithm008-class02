@@ -36,7 +36,7 @@ var searchMatrix = function(matrix, target) {
     let left = 0;
     let right = n*m-1;
     while(left <= right){
-        let mid = ~~(left + (right - left)/2);
+        let mid = (left + (right - left)/2);
         let midValue = matrix[~~(mid/m)][~~(mid%m)];
         if(midValue ===  target)
             return true;
