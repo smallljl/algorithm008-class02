@@ -1,12 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-05-15 19:08:27
- * @LastEditTime: 2020-05-15 19:09:00
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \algorithm008-class02\Week_04\45. 跳跃游戏 II.js
- */ 
-/*
     给定一个非负整数数组，你最初位于数组的第一个位置。
 
     数组中的每个元素代表你在该位置可以跳跃的最大长度。
