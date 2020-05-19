@@ -16,7 +16,6 @@ function Node(value) {
     this.value = value;
     this.children = [];
 }
-
 let node1 = new Node(5);
 let node3 = new Node(3);
 let node2 = new Node(2);
@@ -67,7 +66,7 @@ let levelOrder01 = function(root){
     return nums;
 }
 
-//BFS
+//BFS 模板
 let levelOrder02 = function(root){
     if(!root) return [];
     let queue = [root];
@@ -75,15 +74,31 @@ let levelOrder02 = function(root){
     let res = [];
     while(queue.length){
         let l = queue.length;
-        // res[level] = []
+        res[level] = []
         while(l--){
             let node = queue.shift();
-            // res[level].push(node.val);
+            res[level].push(node.val);
             for(let child of node.children){
                 queue.push(child);
             }
         }
         level++;
+    }
+    return res;
+}
+
+// DFS 模板
+let levelOrder03 = function(root){
+    if(!root) return [];
+    let queue = [{element:root,level:0}];
+    let res = [];
+    while(queue.length){
+        let node = queue.shift();
+        if(!res[node.level]) res[node.level] = [];
+        res[node.level].push(node.element.val);
+        for(let child of node.element.children){
+            queue.push({element:child,level:node.level+1});
+        }
     }
     return res;
 }
