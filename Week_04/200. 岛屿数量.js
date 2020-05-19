@@ -29,7 +29,7 @@
  */
 var numIslands = function(grid) {
     let n,m;
-    function numIslands(grid){
+    function _numIslands(grid){
         let count = 0;
         n = grid.length;
         if(n === 0) return 0;  // 0行
@@ -53,5 +53,5 @@ var numIslands = function(grid) {
         DFSMarking(grid,i,j+1);
         DFSMarking(grid,i,j-1);
     }
-    return numIslands(grid);
+    return _numIslands(grid);
 };
