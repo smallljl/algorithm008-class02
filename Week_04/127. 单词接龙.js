@@ -69,7 +69,7 @@ function ladderLength2(beginWord,endWord,wordList){
        for(let word of queue){
            for(let i = 0; i < word.length;i++){
                let temp = word.substr(0,i)+word.substr(i+1);
-               for(let j = 0; j < wordList.length;j++){
+               for(let j = 0; j < wordList.length;j++){  // 
                    let check = wordList[j].substr(0,i)+wordList[j].substr(i+1);
                    if(temp === check){
                        if(wordList[j] === endWord){

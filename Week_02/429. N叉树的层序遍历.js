@@ -52,3 +52,38 @@ var levelOrder = function(root) {
 };
 console.log(levelOrder(node1));
   
+//DFS
+let levelOrder01 = function(root){
+    function _levelOrder(nums,node,level){
+        if(node === null) return;
+        (!nums[level]) && (nums[level] = []);
+        nums[level].push(node.val);
+        for(let i = 0,len = node.children.length; i < len;i++){
+            _levelOrder(nums,node.children[i],level+1);
+        }
+    }
+    let nums = [];
+    _levelOrder(nums,root,0);
+    return nums;
+}
+
+//BFS
+let levelOrder02 = function(root){
+    if(!root) return [];
+    let queue = [root];
+    let level = 0;
+    let res = [];
+    while(queue.length){
+        let l = queue.length;
+        // res[level] = []
+        while(l--){
+            let node = queue.shift();
+            // res[level].push(node.val);
+            for(let child of node.children){
+                queue.push(child);
+            }
+        }
+        level++;
+    }
+    return res;
+}
