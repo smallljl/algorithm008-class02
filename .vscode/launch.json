@@ -34,7 +34,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\Week_02\\429. N叉树的层序遍历.js"
+            "program": "${workspaceFolder}\\Week_05\\归并排序.js"
         }
     ]
 }

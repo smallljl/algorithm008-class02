@@ -32,11 +32,12 @@
  *
  *
  */
+// 超时
 var ladderLength = function(beginWord, endWord, wordList) {
     let min = Infinity;
     function backtracing(start,end,bank,used,count){
         if(start === end){
-            min = Math.min(min,count);
+            min = Math.min(min,count+1);
             return;
         }
         for(let i = 0; i < bank.length; i ++){
@@ -60,7 +61,38 @@ var ladderLength = function(beginWord, endWord, wordList) {
     return min === Infinity ? 0 : min;
 };
 
-// BFS
+// dfs stack
+function ladder(beginWord,endWord,wordList){
+    let queue = [{word:beginWord,used:[],level:0}];
+    let min = Infinity;
+    while(queue.length){
+        let item = queue.pop();
+        if(item.word === endWord) {
+            min = Math.min(item.level+1,min)
+            continue;
+        }
+        for(let i = 0; i < wordList.length;i++){
+            if(diff(wordList[i],item.word) === 1 && !item.used[i]){
+                let newUsed = [...item.used]
+                newUsed[i] = true;
+                queue.push({word:wordList[i],used:newUsed,level:item.level+1});
+            }
+        }
+    }
+    return min === Infinity ? 0 : min;
+    function diff(a,b){
+        let d = 0;
+        for(let i = 0; i < b.length;i++){
+            if(a.charAt(i) !== b.charAt(i)){
+                d++;
+            }
+        }
+        return d;
+    }
+}
+
+
+// BFS  next[]  保存下一层的值
 function ladderLength2(beginWord,endWord,wordList){
    let queue = [beginWord];
    let step = 1;
@@ -119,7 +151,101 @@ function ladderLength3(beginWord,endWord,wordList){
     return min === Infinity ? 0 : min+1;
 }
 
-let beginWord = "dog";
-let endWord = "col";
-let wordList = ["dol","col"];
-console.log(ladderLength3(beginWord, endWord, wordList));
+let beginWord = "qa";
+let endWord = "sq";
+let wordList = ["si","go","se","mr","pa","sa","he","lr","sq","ye"]
+console.log(ladder(beginWord, endWord, wordList));
+
+
+
+// 解法一：BFS
+let ladderL = function(beginWord,endWord,wordList){
+    if(!endWord || wordList.indexOf(endWord) === -1) return 0;
+    // 各个通用状态对应所有单词   abc ===> 对应得所有状态 a*b *ab 
+    let comboDict = {};
+    let len = beginWord.length;
+    for(let i = 0; i < wordList.length; i ++){
+        for(let r = 0; r < len; r++){
+            let newWord = wordList[i].substr(0,r)+"*"+wordList[i].substr(r+1,len);  // a*b  其中的两个  
+            if(comboDict[newWord]){
+                comboDict[newWord] = [];
+            }
+            comboDict[newWord].push(wordList[i]);
+        }
+    }
+    let queue = [[beginWord,1]];
+    let visited = {beginWord:true};
+    while(queue.length){
+        let currentNode = queue.shift();
+        let currentWord = currentNode[0];
+        let currentLevel = currentNode[1];
+        for(let i = 0; i < len; i++){
+            let newWord = currentWord.substr(0,i)+"*"+currentWord.substr(i+1,len);
+            // 新的word在字典里
+            if(newWord in comboDict){
+                let tempWords = comboDict[newWord];
+                for(let j = 0;j<tempWords.length;j++){
+                    if(tempWords[j] === endWord){
+                        return currentLevel+1;  // 找到
+                    }
+                    if(!visited[tempWords[z]]){
+                        visited[tempWords[z]] = true; // 表示访问过了
+                        queue.push([tempWords[z],currentLevel+1]);
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+
+// 解法三：双端BFS
+let ladderL2 = function(beginWord,endWord,wordList){
+    if(!endWord || wordList.indexOf(endWord) === -1) return 0;
+    // 各个通用状态对应所有单词   abc ===> 对应得所有状态 a*b *ab 
+    let comboDict = {};
+    let len = beginWord.length;
+    for(let i = 0; i < wordList.length; i ++){
+        for(let r = 0; r < len; r++){
+            let newWord = wordList[i].substr(0,r)+"*"+wordList[i].substr(r+1,len);  // a*b  其中的两个  
+            if(!comboDict[newWord]){
+                comboDict[newWord] = [];
+            }
+            comboDict[newWord].push(wordList[i]);
+        }
+    }
+    function visitWord(currQueue,currVisited,otherVisited){
+        let currentNode = currQueue.shift();
+        let currentWord = currentNode[0];
+        let currentLevel = currentNode[1];
+        for(let i = 0; i < len;i++){
+            let newWord = currentWord.substr(0,i)+"*"+currentWord.substr(i+1,len);
+            if(newWord in comboDict){
+                let tmpWords = comboDict[newWord];
+                for(let j = 0; j < tmpWords.length;j++){
+                    if(otherVisited[tempWords[j]])
+                        return currentLevel + otherVisited[tmpWords[j]];
+                    if(!currVisited[tmpWords[j]]){
+                        currVisited[tmpWords[j]] = currentLevel + 1;
+                        currQueue.push([tmpWords[j],currentLevel+1]);
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+    let queueBegin = [[beginWord,1]];
+    let queueEnd = [[endWord,1]];
+    let visitedStart = {};
+    visitedStart[beginWord] = 1;
+    let visitedEnd = {};
+    visitedEnd[endWord] = 1;
+    while(queueBegin.length > 0 && queueEnd.length > 0){
+        let ans = visitWord(queueBegin,visitedStart,visitedEnd);
+        if(ans > -1) return ans;
+        ans = visitWord(queueEnd,visitedEnd,visitedStart);
+        if(ans > -1) return ans;
+    }
+    return 0;
+}
