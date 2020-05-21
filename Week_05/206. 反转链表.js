@@ -48,8 +48,6 @@ let reverseList3 = function(head){
     return currentNode;
 }
 
-
-
 class NodeList{
     constructor(node){
         this.node = node;
