@@ -27,7 +27,7 @@ let reverseList = function(head) {
   return prev;
 };
 
-// 尾递归
+// 尾递归   1 7 2 6 7
 let reverseList2 = function(head){
     function letCurPointToPrev(prev, cur) { // 参数prev和cur就是函数的私有变量
         if (!cur) return prev; // cur推进到了null，结束递归，返回prev
@@ -42,10 +42,10 @@ let reverseList3 = function(head){
     if(head === null || head.next === null){
         return head;
     }
-    let cur = reverseList3(head.next);
+    let currentNode = reverseList(head.next);  // 这里状态一直反转的是5
     head.next.next = head;
     head.next = null;
-    return cur;
+    return currentNode;
 }
 
 
