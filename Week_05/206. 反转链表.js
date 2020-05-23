@@ -34,8 +34,8 @@ let reverseList2 = function(head){
         let next = cur.next; // 暂存cur的下一节点
         cur.next = prev;     // 让cur的next指向prev
         return letCurPointToPrev(cur, next); // 尾递归，cur推进到next，prev尾随cur
-      }
-      return letCurPointToPrev(null, head); // null,head分别成为prev,cur的初始值
+    }
+    return letCurPointToPrev(null, head); // null,head分别成为prev,cur的初始值
 }
 
 let reverseList3 = function(head){

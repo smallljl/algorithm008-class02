@@ -186,11 +186,11 @@ let ladderL = function(beginWord,endWord,wordList){
                 let tempWords = comboDict[newWord];
                 for(let j = 0;j<tempWords.length;j++){
                     if(tempWords[j] === endWord){
-                        return currentLevel+1;  // 找到
+                        return currentLevel+1;  // 找到    // ["si","go","se","mr","pa","sa","he","lr","sq","ye"]
                     }
-                    if(!visited[tempWords[z]]){
-                        visited[tempWords[z]] = true; // 表示访问过了
-                        queue.push([tempWords[z],currentLevel+1]);
+                    if(!visited[tempWords[j]]){  // wordList中的一个   // 第一次访问了  下次访问次数比第一次的次数多   所以可能排除掉
+                        visited[tempWords[j]] = true; // 表示访问过了
+                        queue.push([tempWords[j],currentLevel+1]);
                     }
                 }
             }
