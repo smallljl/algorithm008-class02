@@ -58,6 +58,4 @@ let lowestCommonAncestor = function(root,p,q){
         }
     };
     travel(root);
-
-
 };

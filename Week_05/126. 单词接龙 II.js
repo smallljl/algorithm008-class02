@@ -44,7 +44,7 @@
  * 
  * 
  */
-// 解法一：BFS
+// 解法一：BFS   有bug 好需测试
 let ladderL = function(beginWord,endWord,wordList){
     if(!endWord || wordList.indexOf(endWord) === -1) return 0;
     // 各个通用状态对应所有单词   abc ===> 对应得所有状态 a*b *ab 
@@ -93,7 +93,6 @@ let ladderL = function(beginWord,endWord,wordList){
             }
         }
     }
-    debugger
     console.log(res);
 }
 

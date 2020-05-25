@@ -13,9 +13,7 @@
  * 
  */
 var nthUglyNumber = function(n) {
-    let a = 0;
-    let b = 0;
-    let c = 0;
+    let a = 0,b = 0,c = 0;
     let dp = [1];
     for(let i = 1; i < n;i++){
         dp[i] = Math.min(Math.min(dp[a]*2,dp[b]*3),dp[c]*5);
