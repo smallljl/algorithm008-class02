@@ -21,13 +21,33 @@
 //     return max;
 // };
 
-// O(n) 左右边界同时向中间收敛
+// O(n) 左右边界同时向中间收敛  *****
 var maxArea = function(a){
     let max = 0;
-    for(let i = 0,j = a.length-1;i<j;){
-        let minHeight = a[i] < a[j] ? a[i++] : a[j--];
-        let area = (j-i+1)*minHeight;
-        max = Math.max(max,area);
-    }
+    let left = 0;
+    let right = a.length- 1;
+    while(left < right){
+      let minHeight = a[left] < a[right] ? a[left++] : a[right--];
+      let area = (right-left+1)*minHeight;   // right - left  + 1  间距 
+      max = Math.max(max,area);
+    } 
     return max;
 };
+
+var maxArea1 = function(a){
+  // step.1 最大值是如何得出的，稍微思考就能得出最大值是通过“长x高”
+  // step.2 max(min(EveryItem, EndItem) * (MaxIndex - CurrentIndex))
+  let r = 0;
+  let [i, l] = [0, height.length - 1];
+  while (i < l) {
+    let x = l - i; // 取当前柱子末尾柱子的长
+    //let y = height[i] > height[l] ? height[l] : height[i]; // Math.min,取更矮那个柱子的高
+    //后发现：如果当前柱比末尾的柱子更高的时候？那么末尾柱需要向前移
+    let y = height[i] > height[l] ? height[l--] : height[i++];  // 取比较低的高度
+    let s = x * y; // 长 x 高
+    if (s > r) { // Math.max,取最大值
+      r = s;
+    }
+  }
+  return r;
+}

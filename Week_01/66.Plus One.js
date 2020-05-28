@@ -15,11 +15,17 @@
 输出: [4,3,2,2]
 解释: 输入数组表示数字 4321。*/
 
-var plusOne = function(digits) {
-    const len = digits.length;
+
+// [4,3,2,1]
+//   1     返回自己  1 
+// [4,2,2,9]
+//  4,2,3,0        
+
+var plusOne = function(digits) {        
+    const len = digits.length;         
     for(let i = len-1; i >= 0;i--){
-        digits[i]++;
-        digits[i]%=10;
+        digits[i]++;    // 不是9+1
+        digits[i]%=10;   // 是9变0
         if(digits[i]!==0){
             return digits;
         }
@@ -30,24 +36,17 @@ var plusOne = function(digits) {
 };
 
 var plusOne2 = function(digits){
-    const newNumber = [];
-    let carry = 0;
-    while(digits.length){
-        let number = digits.pop();
-        if(number === 9){
-            carry = 1;
-            newNumber.push(0);
-        } else {
-            carry = 0;
-            number+=1;
-            newNumber.push(number);
-            break;
+    const len = digits.length;         
+    for(let i = len-1; i >= 0;i--){
+        if(digits[i] !== 9){
+            digits[i]++;
+            return digits;
+        }else{
+            digits[i] = 0;
         }
     }
-    if(carry){
-        newNumber.push(1);
-    }
-    digits.push(...newNumber.reverse());
+    digits = [...Array(len + 1)].map(_=>0);
+    digits[0] = 1;
     return digits;
 };
 

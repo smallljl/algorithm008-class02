@@ -13,29 +13,15 @@
 输入: 120
 输出: 21*/
 var reverse = function(x) {
-    let arr = x.toString().split("");
-    let len = arr.length;
-    while(arr[len-1] === "0"){
-        arr.pop();
-        len--;
+    let ord = Math.abs(x);  // ord === 321
+    let now = 0;
+    while(ord > 0){  // 核心算法
+        now = now * 10 + ord % 10;   // 0 + 1  =>  1     1*10 + 2 => 12  12*10 + 3 => 123
+        ord = Math.floor(ord/10);
     }
-    if(arr[0] === "-"){
-        _reverse(1,len-1);
-    }else{
-        _reverse(0,len-1);
-    }
-    let res = Number(arr.join(""));
-    if (res > Math.pow(2, 31) - 1 || res < Math.pow(2, 31) * -1) res = 0;
-    return res;
-
-    function _reverse(i,j){
-        while(i < j){
-            let temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-            i++;
-            j--;
-        }
-    }
+    if(x < 0)  // 是负数
+        return now <= Math.pow(2,31) ? -now : 0;
+    else  // 是正数
+        return now < Math.pow(2,31) ? now : 0;
 };
 console.log(reverse(1534236469));
