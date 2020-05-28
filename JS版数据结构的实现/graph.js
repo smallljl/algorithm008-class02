@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-01-24 11:06:40
- * @LastEditTime : 2020-01-24 21:48:15
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2020-05-28 09:04:50
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \练习\graph.js
  */
@@ -66,7 +66,7 @@ function Graph(){
         var colors = this.initializeColor();
         var enque = new Queue();
         enque.enqueue(initV);
-        while(!enque.isEmpty()){
+        while(!enque.isEmpty()){ 
             var v = enque.dequeue();
             var vList = this.edges.get(v);
             colors[v] = 'gray';
