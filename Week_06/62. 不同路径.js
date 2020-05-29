@@ -32,11 +32,19 @@
  * 
  */
 var uniquePaths = function(m, n) {
-    let dp = Array(m).fill(Array(n)).fill(1);
-    for(let i = 1; i < m;i++){
-        for(let j = 1; j < n; j++){
-            dp[i][j] = dp[i-1][j] + dp[i][j-1];
-        }
-    }
-    return dp[m-1][n-1];
+    // m 行  n 列
+   let dp = new Array(m);   // m 行  
+   for(let i = 0; i < m; i++){ // 
+       dp[i] = new Array(n); 
+       dp[i][0] = 1;  // 第一列为1
+   }
+   for(let r = 0; r < n;r++){
+       dp[0][r] = 1;  // 第一行为1
+   }
+   for(let i = 1;i<m;i++){
+       for(let j = 1;j<n;j++){
+           dp[i][j] = dp[i-1][j] + dp[i][j-1];    // 上面  左边
+       }
+   }
+   return dp[m-1][n-1];
 };
