@@ -41,4 +41,28 @@ var climbStairs = function(n) {
     return _climbStairs(n)
 };
 //  假设  可以 1 级   2级  3级 (easy)
+var climbStairs2 = function(n){
+    function _climbStairs(n){
+        if(n < 0){
+            return 0;
+        }
+        if(n === 0){
+            return 1;
+        }
+        return _climbStairs(n-1) + _climbStairs(n-2) + _climbStairs(n-3);
+    }
+} 
 //  1 2 3 级可调  相邻两步的步伐不能相同  (medium)
+var climbStairs3 = function(n){
+    function _climbStairs(n){
+        if(n < 0){
+            return 0;
+        }
+        if(n === 0){
+            return 1;
+        }
+        
+        // 剪枝
+        return _climbStairs(n-1,1) + _climbStairs(n-2) + _climbStairs(n-3);
+    }
+} 
