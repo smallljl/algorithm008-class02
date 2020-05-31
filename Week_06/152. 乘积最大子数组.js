@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-05-30 19:38:17
+ * @LastEditTime: 2020-05-31 13:28:43
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \algorithm008-class02\Week_06\152. 乘积最大子数组.js
+ */ 
 /**
  *  给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。
 
@@ -22,4 +30,4 @@
  */
 var maxProduct = function(nums) {
 
-};
+}; 

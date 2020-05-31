@@ -27,5 +27,77 @@
  * 
  */
 var rob = function(nums) {
-
+   /*
+   状态表示：dp[i]表示从0到i偷到的最大总数
+   状态转移: dp[i] = Math.max(dp[i-2] + nums[i],dp[i-1]);
+   边界情况: dp[0] nums[0] dp[1] = Math.max(nums[0].nums[1]);
+   */
+   if(nums === null || nums.length === 0)
+       return 0  
+   let length = nums.length;
+   if(length === 1)
+       return nums[0];
+   if(length === 2)
+       return Math.max(nums[0],nums[1]);
+   let dp = [];
+   dp[0] = nums[0];
+   dp[1] = Math.max(nums[0],nums[1]);
+   for(let i = 2;i < length;i++){
+       dp[i] = Math.max(dp[i-2]+nums[i],dp[i-1]);
+       console.log(dp[i]);
+   }
+   return dp[length-1];
 };
+
+var rob1 = function(nums) {
+  /*
+  状态表示：dp[i]表示从0到i偷到的最大总数
+  状态转移: dp[i] = Math.max(dp[i-2] + nums[i],dp[i-1]);
+  边界情况: dp[0] nums[0] dp[1] = Math.max(nums[0].nums[1]);
+  */
+  if(nums === null || nums.length === 0)
+      return 0  
+  let length = nums.length;
+  if(length === 1)
+      return nums[0];
+  if(length === 2)
+      return Math.max(nums[0],nums[1]);
+  let prev = nums[0],curr = Math.max(nums[0],nums[1]);
+  for(let i = 2;i < length;i++){
+     let next = Math.max(prev+nums[i],curr);
+     prev = curr;
+     curr = next;
+  }
+  return curr;
+};
+
+var rob2=function(nums){
+   /*
+   状态表示：dp[i][0]表示偷i的情况下从0到i偷到的最大总数,dp[i][1]表示不投i的情况下从0到i的最大总数
+   状态转移: dp[i][0] = dp[i-1][1] + nums[i]     dp[i][1] = Math.max(dp[i-1][0],dp[i-1][1]);
+   边界情况: dp[0][0] = nums[0]  dp[0][i] = 0
+  */
+   if(nums === null || nums.length === 0){
+      return 0;
+   }
+   let length = nums.length;
+   if(length === 1){
+      return nums[0];
+   }
+   if(length === 2){
+      return Math.max(nums[0],nums[1]);
+   }
+   let dp = new Array(nums.length);
+   for(let i = 0; i < dp.length;i++){
+      dp[i] = new Array(2);
+   }
+   dp[0][0] = nums[0];
+   dp[0][1] = 0;
+   for(let i = 1; i < length;i++){
+      dp[i][0] = dp[i-1][1]+nums[i];
+      dp[i][1] = Math.max(dp[i-1][0],dp[i-1][1]);
+   }
+   return Math.max(dp[length-1][0],dp[length-1][1]);
+}
+
+// 优化0(1)的空间复杂度 
