@@ -45,3 +45,17 @@ var uniquePaths = function(m, n) {
            dp[i][j] = dp[i-1][j] + dp[i][j-1];    // 上面  左边
    return dp[m-1][n-1];
 }; 
+
+var uniquePaths1 = function(m,n){
+    let dp = new Array(n).fill(1);
+    for(let i = 1; i < m;i++){
+        for(let j = 1;j<n;j++){
+            dp[j] += dp[j-1];
+        }
+    }
+    return dp[n-1];   //  从第一行到  一行一行往下
+    // [ 1,1,1,1
+    //   1,2,3,4
+    //   1,3,6,10
+    //   1,4,10,16]
+ }
