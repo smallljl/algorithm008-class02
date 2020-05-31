@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-05-30 19:38:17
+ * @LastEditTime: 2020-05-31 21:55:35
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \algorithm008-class02\Week_06\120. 三角形最小路径和.js
+ */ 
 /**
  *  给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。
 
@@ -9,7 +17,7 @@
         [2],
        [3,4],
       [6,5,7],
-     [4,1,8,3]
+     [4,1,8,3]  
     ]
     自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。
     说明：
