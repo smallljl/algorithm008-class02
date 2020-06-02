@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-01 22:37:19
- * @LastEditTime: 2020-06-02 19:40:23
+ * @LastEditTime: 2020-06-02 19:46:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \algorithm008-class02\Week_07\22. 括号生成.js
@@ -14,7 +14,7 @@
     输入：n = 3
     输出：[
         "((()))",
-        "(()())",
+        "(()())",  
         "(())()",
         "()(())",
         "()()()"
